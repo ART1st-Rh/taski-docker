@@ -2,7 +2,7 @@ version: '3'
 
 volumes:
   pg_data_t:
-  static_t:
+  static:
 
 services:
   db:
@@ -14,18 +14,18 @@ services:
     build: ./backend/
     env_file: .env
     volumes:
-      - static_t:/backend_static  
+      - static:/backend_static  
   frontend:
     env_file: .env
     build: ./frontend/
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_t:/frontend_static
+      - static:/frontend_static
 
   gateway:
 
     build: ./gateway/
     volumes:
-      - static_t:/staticfiles/
+      - static:/staticfiles/
     ports:
       - 8000:80

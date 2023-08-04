@@ -2,7 +2,7 @@ version: '3'
 
 volumes:
   pg_data_production_t:
-  static_volume_t:
+  static_volume:
 
 services:
   db:
@@ -14,17 +14,17 @@ services:
     image: artist9/taski_backend
     env_file: .env
     volumes:
-      - static_volume_t:/backend_static
+      - static_volume:/backend_static
   frontend:
     image: artist9/taski_frontend  
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_volume_t:/frontend_static
+      - static_volume:/frontend_static
   gateway:
     image: artist9/taski_gateway
     env_file: .env
     volumes:
-      - static_volume_t:/staticfiles/
+      - static_volume:/staticfiles/
     ports:
       - 8000:80
